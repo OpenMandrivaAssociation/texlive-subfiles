@@ -5,8 +5,8 @@
 # catalog-license undef
 # catalog-version undef
 Name:		texlive-subfiles
-Version:	20120810
-Release:	9
+Version:	1.1
+Release:	1
 Summary:	TeXLive subfiles package
 Group:		Publishing
 URL:		http://tug.org/texlive
