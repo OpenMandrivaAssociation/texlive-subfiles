@@ -1,6 +1,6 @@
 Name:		texlive-subfiles
 Version:	56977
-Release:	1
+Release:	2
 Summary:	TeXLive subfiles package
 Group:		Publishing
 URL:		http://tug.org/texlive
