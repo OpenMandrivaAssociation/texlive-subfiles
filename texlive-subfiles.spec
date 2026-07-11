@@ -1,46 +1,25 @@
-Name:		texlive-subfiles
-Version:	56977
-Release:	2
-Summary:	TeXLive subfiles package
+%global tl_name subfiles
+%global tl_revision 77682
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	2.2
+Release:	%{tl_revision}.1
+Summary:	Individual typesetting of subfiles of a main document
 Group:		Publishing
-URL:		https://tug.org/texlive
-License:	http://www.tug.org/texlive/LICENSE.TL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/subfiles.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/subfiles.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/subfiles.source.r%{version}.tar.xz
+URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/subfiles
+License:	lppl1.3
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/subfiles.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/subfiles.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/subfiles.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Requires:	texlive(import)
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-TeXLive subfiles package.
+Using this package the user can handle multi-file projects more
+comfortably, making it possible to both process the subsidiary files by
+themselves and to process the main file that includes them, without
+making any changes to either.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/tex/latex/subfiles/subfiles.cls
-%{_texmfdistdir}/tex/latex/subfiles/subfiles.sty
-%doc %{_texmfdistdir}/doc/latex/subfiles/README
-%doc %{_texmfdistdir}/doc/latex/subfiles/subfiles.pdf
-#- source
-%doc %{_texmfdistdir}/source/latex/subfiles/subfiles.dtx
-%doc %{_texmfdistdir}/source/latex/subfiles/subfiles.ins
-
-#-----------------------------------------------------------------------
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
